@@ -2,9 +2,14 @@
   <div class="container">
     <div class="actors">
     </div>
-    <button @click="$fetch">Загрузить актеров</button>
-    <p>{{films}}</p>
-  </div>
+    <button @click="$fetch">Загрузить актеров</button> 
+    <br>
+  <ul id="example-1">
+    <li v-for="film in films" :key="film">
+      {{ films.data.data.title.Director }}
+    </li>
+  </ul>  
+</div>
 
 </template>
 
@@ -17,8 +22,9 @@ export default {
     },
     async fetch() {
       this.films = await fetch(
-        'https://ed98e0f65150.ngrok.io/api/filmlist'
+        'http://localhost:3001/api/filmlist'
       ).then(res => res.json())
+      films = films.data
     }
   }
 </script>
@@ -33,31 +39,7 @@ export default {
   text-align: center;
 }
 
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
 
 .links {
   padding-top: 15px;
