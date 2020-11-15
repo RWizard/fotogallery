@@ -1,31 +1,30 @@
 <template>
-  <div class="container">
-    <div class="actors">
-    </div>
-    <button @click="$fetch">Загрузить актеров</button> 
-    <br>
-  <ul id="example-1">
-    <li v-for="film in films" :key="film">
-      {{ films.data.data.title.Director }}
-    </li>
-  </ul>  
-</div>
-
+<div class="container">
+  <div class="films" >
+    <ul>
+      <li v-for="film in films" :key="film.data.ts">
+        {{film.data.title.Title}} 
+      </li> 
+    </ul> 
+  </div>
+</div> 
 </template>
 
 <script>
 export default {
+    name: "app",
     data() {
       return {
         films: []
-      }
+      };
     },
-    async fetch() {
-      this.films = await fetch(
-        'http://localhost:3001/api/filmlist'
-      ).then(res => res.json())
-      films = films.data
-    }
+    async mounted() {
+      const res = await fetch(
+        "http://localhost:3001/api/filmlist"
+      );
+      const films = await res.json();
+      this.films = films.data; 
+    },
   }
 </script>
 
