@@ -2,34 +2,40 @@
 <div class="container">
   <div class="films" >
     <ul>
-      <li v-for="film in films" :key="film.data.ts">
-        {{film.data.title.Title}} 
-      </li> 
+      <p v-for="film in films" :key="film.data.ts">
+        {{film.data.title.Title}} <br>
+        <img :src="film.data.title.Poster">
+      </p> 
     </ul> 
   </div>
-  <h1>Works</h1>
 </div> 
 </template>
 
 <script>
+
 export default {
+
     name: "app",
     data() {
       return {
         films: []
       };
     },
+    
     async mounted() {
       const res = await fetch(
-        "http://localhost:3001/api/filmlist"
+        "http://localhost:3000/api/get_films"
       );
       const films = await res.json();
       this.films = films.data; 
-    },
-  }
+    }
+
+   }
+
 </script>
 
 <style>
+
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -39,9 +45,4 @@ export default {
   text-align: center;
 }
 
-
-
-.links {
-  padding-top: 15px;
-}
 </style>
