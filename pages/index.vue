@@ -2,13 +2,13 @@
 <div class="container">
   <div class="films" >
     <ul>
-      <p v-for="film in films" :key="film.data.ts">
+      <nuxt-link :to="/films/ + film.data.title.Title" v-for="film in films" :key="film.data.ts" v-on:click="() => getFilm(film.data.ref['@ref'].id)">
         {{film.data.title.Title}} <br>
-        <img :src="film.data.title.Poster">
-      </p> 
+      </nuxt-link> 
     </ul> 
   </div>
 </div> 
+ 
 </template>
 
 <script>
@@ -18,18 +18,21 @@ export default {
     name: "app",
     data() {
       return {
-        films: []
+        films: [],
+        id: ""
       };
     },
     
     async mounted() {
       const res = await fetch(
-        "http://localhost:3000/api/get_films"
+        "http://localhost:3000/api/actors/films"
       );
       const films = await res.json();
       this.films = films.data; 
+    },
+    async getFilm(userId) {
+      console.log(userId)
     }
-
    }
 
 </script>
