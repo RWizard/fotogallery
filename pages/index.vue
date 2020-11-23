@@ -2,13 +2,12 @@
 <div class="container">
   <div class="films" >
     <ul>
-      <nuxt-link :to="/films/ + film.data.title.Title" v-for="film in films" :key="film.data.ts" v-on:click="() => getFilm(film.data.ref['@ref'].id)">
+      <nuxt-link :to='/films/ + film.data.ref["@ref"].id' v-for="film in films" :key='film.data'>
         {{film.data.title.Title}} <br>
       </nuxt-link> 
     </ul> 
   </div>
 </div> 
- 
 </template>
 
 <script>
