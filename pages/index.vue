@@ -2,12 +2,17 @@
 <div class="container">
   <div class="films" >
     <ul>
-      <nuxt-link :to='/films/ + film.data.ref["@ref"].id' v-for="film in films" :key='film.data'>
+      <li v-for="film in films" :key='actorLink(film)'>
+        <a :href="actorLink(film)">
+          {{film.data.title.Title}}
+        </a>
+      </li>
+      <!-- <nuxt-link :to=`/films/${film.data.ref['@ref'].id}`  >
         {{film.data.title.Title}} <br>
-      </nuxt-link> 
-    </ul> 
+      </nuxt-link>  -->
+    </ul>
   </div>
-</div> 
+</div>
 </template>
 
 <script>
@@ -15,19 +20,25 @@
 export default {
 
     name: "app",
+    methods: {
+      actorLink(id) {
+        // console.log('id :>> ', id.ref['@ref'].id);
+        return `/films/${ id.ref['@ref'].id }`
+      }
+    },
     data() {
       return {
         films: [],
         id: ""
       };
     },
-    
+
     async mounted() {
       const res = await fetch(
         "http://localhost:3000/api/actors/films"
       );
       const films = await res.json();
-      this.films = films.data; 
+      this.films = films.data;
     },
     async getFilm(userId) {
       console.log(userId)
