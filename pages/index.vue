@@ -7,9 +7,9 @@
           {{film.data.title.Title}}
         </a>
       </li>
-      <!-- <nuxt-link :to=`/films/${film.data.ref['@ref'].id}`  >
+      <!--- <nuxt-link :to=`/films/${film.data.ref['@ref'].id}`  >
         {{film.data.title.Title}} <br>
-      </nuxt-link>  -->
+      </nuxt-link>  --->
     </ul>
   </div>
 </div>
